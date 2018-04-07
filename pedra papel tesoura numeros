@@ -3,15 +3,15 @@ import random
  
 ids = [1, 2, 3]
  
-random.choice(ids) 
+escolha_computador = random.choice(ids) 
 
 num = int(input('1 - papel \n 2 - pedra \n 3 - tesoura \n')) 
 
-if num == 1 and random.choice(ids) == 1 or num == 2 and random.choice(ids) == 2 or num == 3 and random.choice(ids) == 3:
+if num == escolha_computador :
     print ('empate')
-elif num == 2 and random.choice(ids) == 1 or num == 3 and random.choice(ids) == 2 or num == 1 and random.choice(ids) == 3:
+elif (num == 2 and escolha_computador == 1) or (num == 3 and escolha_computador == 2) or (num == 1 and escolha_computador == 3):
     print ('computador ganhou')
-elif num == 1 and random.choice(ids) == 2 or num == 2 and random.choice(ids) == 3 or num == 3 and random.choice(ids) == 1:
+elif (num == 1 and escolha_computador == 2) or (num == 2 and escolha_computador == 3) or (num == 3 and escolha_computador == 1):
     print ('voce ganhou')
 else :
     print ('blz?')
