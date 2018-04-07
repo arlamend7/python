@@ -13,3 +13,5 @@ elif num == 'pedra' and random.choice(ids) == 'papel' or num == 'tissoura' and r
     print ('computador ganhou')
 elif num == 'papel' and random.choice(ids) == 'pedra' or num == 'pedra' and random.choice(ids) == 'tissoura' or num == 'tissoura' and random.choice(ids) == 'papel':
     print ('voce ganhou')
+else :
+    print ('blz?')
