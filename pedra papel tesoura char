@@ -2,15 +2,15 @@ import random
  
 ids = ['pedra', 'papel', 'tissoura']
  
-random.choice(ids) 
+escolha_computador = random.choice(ids) 
 
 num = str(input('pedra, papel ou tesoura? \n')) 
 
 if num == random.choice(ids):
     print ('empate')
-elif num == 'pedra' and random.choice(ids) == 'papel' or num == 'tesoura' and random.choice(ids) == 'pedra' or num == 'papel' and random.choice(ids) == 'tesoura':
+elif (num == 'pedra' and escolha_computador == 'papel') or (num == 'tesoura' and escolha_computador == 'pedra') or (num == 'papel' and escolha_computador == 'tesoura'):
     print ('computador ganhou')
-elif num == 'papel' and random.choice(ids) == 'pedra' or num == 'pedra' and random.choice(ids) == 'tesoura' or num == 'tesoura' and random.choice(ids) == 'papel':
+elif (num == 'papel' and escolha_computador == 'pedra') or num == 'pedra' and escolha_computador == 'tesoura') or (num == 'tesoura' and escolha_computador == 'papel'):
     print ('voce ganhou')
 else :
     print ('blz?')
