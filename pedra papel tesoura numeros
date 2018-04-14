@@ -1,17 +1,30 @@
-
 import random
- 
-ids = [1, 2, 3]
- 
-escolha_computador = random.choice(ids) 
 
-num = int(input('1 - papel \n 2 - pedra \n 3 - tesoura \n')) 
+contadorvc = 0
+contadorpc = 0
 
-if num == escolha_computador :
-    print ('empate')
-elif (num == 2 and escolha_computador == 1) or (num == 3 and escolha_computador == 2) or (num == 1 and escolha_computador == 3):
-    print ('computador ganhou')
-elif (num == 1 and escolha_computador == 2) or (num == 2 and escolha_computador == 3) or (num == 3 and escolha_computador == 1):
-    print ('voce ganhou')
-else :
-    print ('blz?')
+while True:
+    if contadorvc = 10 or contadorpc == 10:
+        print('Parabens ao vencendor')
+    else:
+
+        import random
+         
+        ids = [1, 2, 3]
+         
+        escolha_computador = random.choice(ids) 
+        
+        num = int(input('1 - papel \n 2 - pedra \n 3 - tesoura \n')) 
+        
+        if num == escolha_computador :
+            print ('empate')
+        elif (num == 2 and escolha_computador == 1) or (num == 3 and escolha_computador == 2) or (num == 1 and escolha_computador == 3):
+            print ('computador ganhou')
+            contadorpc = contadorpc + 1
+            print("computador {} x voce {}".format(contadorpc, contadorvc))
+        elif (num == 1 and escolha_computador == 2) or (num == 2 and escolha_computador == 3) or (num == 3 and escolha_computador == 1):
+            print ('voce ganhou')
+            contadorvc = contadorvc + 1
+            print("computador {} x voce {}".format(contadorpc, contadorvc))
+        else :
+            exit()
