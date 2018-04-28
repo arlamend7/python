@@ -1,0 +1,1089 @@
+lista = ['2', '3', '4', '5', '6', 'Q', 'J', 'K', '7', 'A']
+
+nipe = ['espada', 'copas', 'ouro', 'paus']
+
+lista_1 = ['Q', 'J', 'K', '7', 'A']
+
+lista2 = ['2', '3', '4', '5', '6', '8', '9', '1']
+
+valores = {
+
+    'Q': 2,
+
+    'J': 3,
+
+    'K': 4,
+
+    '7': 10,
+
+    'A': 11
+
+}
+
+valoresindex = {
+
+    '2': 2,
+
+    '3': 3,
+
+    '4': 4,
+
+    '5': 5,
+
+    '6': 6,
+
+}
+
+nipe_valores = {
+
+    'espada': 1,
+
+    'copas': 2,
+
+    'ouro': 3,
+
+    'paus': 4
+
+}
+
+analise_nipe = []
+
+valor_nipe = 0
+
+analise_nipe2 = []
+
+valor_nipe2 = 0
+
+analise_valor = []
+
+valor_card = 0
+
+valorindex = 0
+
+analise_valor2 = []
+
+valor_card2 = 0
+
+valorindex2 = 0
+
+corte = []
+
+analise_nipe1 = []
+
+valor_nipe1 = 0
+
+baralho = []
+
+ult_carta = []
+
+jogada_vc = []
+
+jogador = []
+
+computador_jogada = []
+
+computador = []
+
+seus_pontos = 0
+
+suas_cartas = []
+
+pontos_do_computador = 0
+
+cartas_computador = []
+
+pontos = 0
+
+Todas_as_jogadas = []
+
+se = int(input('vc sabe jogar bisca? \n[1]- aprender \n[2]- skip tutorial\n'))
+
+if se == 1:
+    print('Um jogo de bisca possui 120 pontos em seu total, caso voce consiga mais de 60 pontos, Parabens, voce ganha')
+    print('Para que voce ganhe ponto, vc devera ganhar as partidas(1 carta x 1 carta)\n')
+    print('Para vencer:\nOs nipes mais forte, respectivamente:\n é o do corte[sera dado antes de toda jogada],\n o nipe do 1 jogar,\n os outros não sao relevantes para tentar ganhar\n')
+    print('Os valores são:\n As = 11pontos,\n 7 = 10pontos, \n K = 4pontos, \n J = 3pontos, \n Q = 2pontos\n')
+    print('O nipe será mais relevante, caso sejam iguias, a pontuação, caso os 2 sejam iguais \n será a ordem de numeros.')
+    print('EX:\n 10-espadas x 5-espadas\n o 10 ganha porem a jogada tem o valor de 0 pontos\n \n \n ')
+while True:
+        while len(baralho) != 40:
+
+            import random
+
+            num = random.choice(lista)
+
+            np = random.choice(nipe)
+
+            carta = num + '-' + np
+
+            if carta not in baralho:
+
+                baralho.append(carta)
+
+                if carta[0:1] in valores:
+                    pontos += valores[carta[0:1]]
+
+        while len(ult_carta) != 1:
+
+            import random
+
+            Trunfo = random.choice(baralho)
+
+            if Trunfo[0:1] not in lista_1:
+
+                if Trunfo[0:1] != '1':
+
+                    ult_carta.append(Trunfo)
+
+                    corte.append(Trunfo[2:len(Trunfo)])
+
+                    del baralho[baralho.index(Trunfo)]
+
+                    valor_nipe1 += nipe_valores[corte[0]]
+
+                else:
+
+                    ult_carta.append(Trunfo)
+
+                    corte.append(Trunfo[3:len(Trunfo)])
+
+                    del baralho[baralho.index(Trunfo)]
+
+                    valor_nipe1 += nipe_valores[corte[0]]
+
+        while len(jogador) != 3:
+            import random
+
+            CARD = random.choice(baralho)
+
+            jogador.append(CARD)
+
+            del baralho[baralho.index(CARD)]
+
+        while len(computador) != 3:
+            import random
+
+            CARD = random.choice(baralho)
+
+            computador.append(CARD)
+
+            del baralho[baralho.index(CARD)]
+
+        max = 'A-' + corte[0]
+
+        inmax = '7-' + corte[0]
+
+        jogar = int(input('1 - jogar primeiro \n2- computador jogar primeiro\n'))
+
+        while len(jogador) != 0 and len(computador) != 0:
+
+            if jogar == 2:
+
+                while len(computador) != 3 and len(baralho) != 0:
+                    import random
+
+                    CARD = random.choice(baralho)
+
+                    computador.append(CARD)
+
+                    del baralho[baralho.index(CARD)]
+
+                import random
+
+                jogada_pc = random.choice(computador)
+
+                computador_jogada.append(jogada_pc)
+
+                analise_valor2.append(jogada_pc[0:1])
+
+                if jogada_pc[0:1] != '1':
+
+                    analise_nipe2.append(jogada_pc[2:len(jogada_pc)])
+
+                else:
+
+                    analise_nipe2.append(jogada_pc[3:len(jogada_pc)])
+
+                if analise_valor2[0] in lista_1:
+
+                    valor_card2 += valores[analise_valor2[0]]
+
+                elif analise_valor2[0] in lista2:
+
+                    valorindex2 += valoresindex[jogada_pc[0:1]]
+
+                valor_nipe2 += nipe_valores[analise_nipe2[0]]
+
+                if max in computador_jogada and (inmax in baralho or inmax in computador or inmax in jogador):
+
+                    jogar = 2
+
+                else:
+
+                    del computador[computador.index(jogada_pc)]
+
+                    while len(jogador) != 3 and len(baralho) != 0:
+
+                        if len(baralho) == 0 and len(ult_carta) != 0:
+
+                            jogador.append[ult_carta[0]]
+
+                        else:
+
+                            import random
+
+                            CARD = random.choice(baralho)
+
+                            jogador.append(CARD)
+
+                            del baralho[baralho.index(CARD)]
+
+                    print('\n{}'.format(corte[0]))
+
+                    print('o computador jogou: {}'.format(jogada_pc))
+
+                    if len(jogador) == 3:
+                        print('[1]- [{} \n[2]- [{}\n[3]- [{}'.format(jogador[0], jogador[1], jogador[2]))
+                    if len(jogador) == 2:
+                        print('[1]- [{} \n[2]- [{}\n'.format(jogador[0], jogador[1]))
+                    if len(jogador) == 1:
+                        print('[1]- [{} \n'.format(jogador[0]))
+
+                    jogada = int(input('\n'))
+
+                    if jogada <= 3 and jogada > 0:
+
+                        jogad = jogador[jogada - 1]
+
+                        jogada_vc.append(jogad)
+
+                        analise_valor.append(jogad[0:1])
+
+                        if jogad[0:1] != '1':
+
+                            analise_nipe.append(jogad[2:len(jogad)])
+
+                        else:
+
+                            analise_nipe.append(jogad[3:len(jogad)])
+
+                        if analise_valor[0] in lista_1:
+
+                            valor_card += valores[jogad[0:1]]
+
+                        elif analise_valor[0] in lista2:
+
+                            valorindex += valoresindex[jogad[0:1]]
+
+                        valor_nipe += nipe_valores[analise_nipe[0]]
+
+                        if max in jogad and (inmax in baralho or inmax in computador or inmax in jogador):
+
+                            jogar = 1
+
+                            print('voce so poderá jogar esta carta depois do 7-{} ser jogado'.format(corte[0]))
+
+                        else:
+                            del jogador[jogada - 1]
+
+                            if (valor_nipe == valor_nipe1) and (valor_nipe2 != valor_nipe1):
+
+                                pontos_rodada = valor_card + valor_card2
+
+                                seus_pontos += valor_card + valor_card2
+
+                                suas_cartas.append(jogad)
+
+                                suas_cartas.append(jogada_pc)
+
+                                jogar = 1
+
+                                print('{} x {} \nvocê ganhou {} pontos'.format(jogad, jogada_pc, pontos_rodada))
+
+
+
+
+                            elif (valor_nipe != valor_nipe1) and (valor_nipe2 == valor_nipe1):
+
+                                pontos_rodada = valor_card + valor_card2
+
+                                pontos_do_computador += valor_card + valor_card2
+
+                                suas_cartas.append(jogad)
+
+                                suas_cartas.append(jogada_pc)
+
+                                jogar = 2
+
+                                print('{} x {} \ncomputador ganhou {} pontos'.format(jogad, jogada_pc, pontos_rodada))
+
+
+
+
+
+                            elif valor_nipe == valor_nipe2:
+
+                                if valor_card > valor_card2:
+
+                                    pontos_rodada = valor_card + valor_card2
+
+                                    seus_pontos += valor_card + valor_card2
+
+                                    suas_cartas.append(jogad)
+
+                                    suas_cartas.append(jogada_pc)
+
+                                    jogar = 1
+
+                                    print('{} x {} \nvocê ganhou {} pontos'.format(jogad, jogada_pc, pontos_rodada))
+
+
+
+
+
+                                elif valor_card < valor_card2:
+
+                                    pontos_rodada = valor_card + valor_card2
+
+                                    pontos_do_computador += valor_card + valor_card2
+
+                                    suas_cartas.append(jogad)
+
+                                    suas_cartas.append(jogada_pc)
+
+                                    jogar = 2
+
+                                    print('{} x {} \ncomputador ganhou {} pontos'.format(jogad, jogada_pc, pontos_rodada))
+
+
+
+                                else:
+
+                                    if valorindex > valorindex2:
+
+                                        pontos_rodada = valor_card + valor_card2
+
+                                        suas_cartas.append(jogad)
+
+                                        suas_cartas.append(jogada_pc)
+
+                                        jogar = 1
+
+                                        print('{} x {} \nvocê ganhou {} pontos'.format(jogad, jogada_pc, pontos_rodada))
+
+
+
+
+
+                                    elif valorindex < valorindex2:
+
+                                        pontos_rodada = valor_card + valor_card2
+
+                                        suas_cartas.append(jogad)
+
+                                        suas_cartas.append(jogada_pc)
+
+                                        jogar = 2
+
+                                        print('{} x {} \ncomputador ganhou {} pontos'.format(jogad, jogada_pc, pontos_rodada))
+
+
+
+                            elif valor_nipe != valor_nipe2:
+
+                                pontos_rodada = valor_card + valor_card2
+
+                                pontos_do_computador += valor_card + valor_card2
+
+                                suas_cartas.append(jogad)
+
+                                suas_cartas.append(jogada_pc)
+
+                                jogar = 2
+
+                                print('{} x {} \ncomputador ganhou {} pontos'.format(jogad, jogada_pc, pontos_rodada))
+
+                    valor_nipe = 0
+
+                    valor_card = 0
+
+                    valorindex = 0
+
+                    del analise_valor[0]
+
+                    del analise_nipe[0]
+
+                    del jogada_vc[0]
+
+                    Todas_as_jogadas.append(jogad)
+
+                    Todas_as_jogadas.append(jogada_pc)
+
+                del computador_jogada[0]
+
+                del analise_nipe2[0]
+
+                del analise_valor2[0]
+
+                valorindex2 = 0
+
+                valor_nipe2 = 0
+
+                valor_card2 = 0
+
+            if jogar == 1:
+
+                while len(jogador) != 3 and len(baralho) != 0:
+                    import random
+
+                    CARD = random.choice(baralho)
+
+                    jogador.append(CARD)
+
+                    del baralho[baralho.index(CARD)]
+
+                print('\n{}'.format(corte[0]))
+                if len(jogador) == 3:
+                    print('[1]- [{} \n[2]- [{}\n[3]- [{}'.format(jogador[0], jogador[1], jogador[2]))
+                if len(jogador) == 2:
+                    print('[1]- [{} \n[2]- [{}\n'.format(jogador[0], jogador[1]))
+                if len(jogador) == 1:
+                    print('[1]- [{} \n'.format(jogador[0]))
+
+
+                jogada = int(input('\n'))
+
+
+                if jogada <= 3 and jogada > 0:
+
+                    jogad = jogador[jogada - 1]
+
+                    jogada_vc.append(jogad)
+
+                    analise_valor.append(jogad[0:1])
+
+                    if jogad[0:1] != '1':
+
+                        analise_nipe.append(jogad[2:len(jogad)])
+
+                    else:
+
+                        analise_nipe.append(jogad[3:len(jogad)])
+
+                    if analise_valor[0] in lista_1:
+
+                        valor_card += valores[jogad[0:1]]
+
+                    elif analise_valor[0] in lista2:
+
+                        valorindex += valoresindex[jogad[0:1]]
+
+                    valor_nipe += nipe_valores[analise_nipe[0]]
+
+                    if max in jogad and (inmax in baralho or inmax in computador or inmax in jogador):
+
+                        jogar = 1
+
+                        print('voce so poderá jogar esta carta depois do 7-{} ser jogado'.format(corte[0]))
+
+                    else:
+
+                        del jogador[jogada - 1]
+
+                        while len(computador) != 3 and len(baralho) != 0:
+
+                            if len(baralho) == 0 and len(ult_carta) != 0:
+
+                                computador.append[ult_carta[0]]
+
+                            else:
+
+                                import random
+
+                                CARD = random.choice(baralho)
+
+                                computador.append(CARD)
+
+                                del baralho[baralho.index(CARD)]
+
+                        i = -(len(computador) - 1)
+
+                        while i <= 0 and len(computador_jogada) != 1:
+
+                            jogada_pc = computador[i]
+
+                            analise_valor2.append(jogada_pc[0:1])
+
+                            if jogada_pc[0:1] != '1':
+
+                                analise_nipe2.append(jogada_pc[2:len(jogada_pc)])
+
+                            else:
+
+                                analise_nipe2.append(jogada_pc[3:len(jogada_pc)])
+
+                            if analise_valor2[0] in lista_1:
+
+                                valor_card2 += valores[analise_valor2[0]]
+
+                            elif analise_valor2[0] in lista2:
+
+                                valorindex2 += valoresindex[jogada_pc[0:1]]
+
+                            valor_nipe2 += nipe_valores[analise_nipe2[0]]
+
+                            if valor_nipe == valor_nipe2 and valor_card2 > valor_card and valor_nipe != valor_nipe1:
+
+                                computador_jogada.append(jogada_pc)
+
+                            else:
+
+                                i += 1
+
+                                del analise_nipe2[0]
+
+                                del analise_valor2[0]
+
+                                valorindex2 = 0
+
+                                valor_card2 = 0
+
+                                valor_nipe2 = 0
+
+                        i = -(len(computador) - 1)
+
+                        while i <= 0 and len(computador_jogada) != 1:
+
+                            jogada_pc = computador[i]
+
+                            analise_valor2.append(jogada_pc[0:1])
+
+                            if jogada_pc[0:1] != '1':
+
+                                analise_nipe2.append(jogada_pc[2:len(jogada_pc)])
+
+                            else:
+
+                                analise_nipe2.append(jogada_pc[3:len(jogada_pc)])
+
+                            if analise_valor2[0] in lista_1:
+
+                                valor_card2 += valores[analise_valor2[0]]
+
+                            elif analise_valor2[0] in lista2:
+
+                                valorindex2 += valoresindex[jogada_pc[0:1]]
+
+                            valor_nipe2 += nipe_valores[analise_nipe2[0]]
+
+                            if valor_nipe1 == valor_nipe2 and valorindex2 <= 6 and valor_card > 0:
+
+                                computador_jogada.append(jogada_pc)
+
+                            else:
+
+                                i += 1
+
+                                del analise_nipe2[0]
+
+                                del analise_valor2[0]
+
+                                valorindex2 = 0
+
+                                valor_card2 = 0
+
+                                valor_nipe2 = 0
+
+                        i = -(len(computador) - 1)
+
+                        while i <= 0 and len(computador_jogada) != 1:
+
+                            jogada_pc = computador[i]
+
+                            analise_valor2.append(jogada_pc[0:1])
+
+                            if jogada_pc[0:1] != '1':
+
+                                analise_nipe2.append(jogada_pc[2:len(jogada_pc)])
+
+                            else:
+
+                                analise_nipe2.append(jogada_pc[3:len(jogada_pc)])
+
+                            if analise_valor2[0] in lista_1:
+
+                                valor_card2 += valores[analise_valor2[0]]
+
+                            elif analise_valor2[0] in lista2:
+
+                                valorindex2 += valoresindex[jogada_pc[0:1]]
+
+                            valor_nipe2 += nipe_valores[analise_nipe2[0]]
+
+                            if valor_nipe2 != valor_nipe1 and valorindex < 4:
+
+                                computador_jogada.append(jogada_pc)
+
+                            else:
+
+                                i += 1
+
+                                del analise_nipe2[0]
+
+                                del analise_valor2[0]
+
+                                valorindex2 = 0
+
+                                valor_card2 = 0
+
+                                valor_nipe2 = 0
+
+                        i = -(len(computador) - 1)
+
+                        while i <= 0 and len(computador_jogada) != 1:
+
+                            jogada_pc = computador[i]
+
+                            analise_valor2.append(jogada_pc[0:1])
+
+                            if jogada_pc[0:1] != '1':
+
+                                analise_nipe2.append(jogada_pc[2:len(jogada_pc)])
+
+                            else:
+
+                                analise_nipe2.append(jogada_pc[3:len(jogada_pc)])
+
+                            if analise_valor2[0] in lista_1:
+
+                                valor_card2 += valores[analise_valor2[0]]
+
+                            elif analise_valor2[0] in lista2:
+
+                                valorindex2 += valoresindex[jogada_pc[0:1]]
+
+                            valor_nipe2 += nipe_valores[analise_nipe2[0]]
+
+                            if valor_nipe2 != valor_nipe1 and valorindex < 6:
+
+                                computador_jogada.append(jogada_pc)
+
+                            else:
+
+                                i += 1
+
+                                del analise_nipe2[0]
+
+                                del analise_valor2[0]
+
+                                valorindex2 = 0
+
+                                valor_card2 = 0
+
+                                valor_nipe2 = 0
+
+                        i = -(len(computador) - 1)
+
+                        while i <= 0 and len(computador_jogada) != 1:
+
+                            jogada_pc = computador[i]
+
+                            analise_valor2.append(jogada_pc[0:1])
+
+                            if jogada_pc[0:1] != '1':
+
+                                analise_nipe2.append(jogada_pc[2:len(jogada_pc)])
+
+                            else:
+
+                                analise_nipe2.append(jogada_pc[3:len(jogada_pc)])
+
+                            if analise_valor2[0] in lista_1:
+
+                                valor_card2 += valores[analise_valor2[0]]
+
+                            elif analise_valor2[0] in lista2:
+
+                                valorindex2 += valoresindex[jogada_pc[0:1]]
+
+                            valor_nipe2 += nipe_valores[analise_nipe2[0]]
+
+                            if valor_nipe2 != valor_nipe1 and valorindex < 8:
+
+                                computador_jogada.append(jogada_pc)
+
+                            else:
+
+                                i += 1
+
+                                del analise_nipe2[0]
+
+                                del analise_valor2[0]
+
+                                valorindex2 = 0
+
+                                valor_card2 = 0
+
+                                valor_nipe2 = 0
+
+                        i = -(len(computador) - 1)
+
+                        while i <= 0 and len(computador_jogada) != 1:
+
+                            jogada_pc = computador[i]
+
+                            analise_valor2.append(jogada_pc[0:1])
+
+                            if jogada_pc[0:1] != '1':
+
+                                analise_nipe2.append(jogada_pc[2:len(jogada_pc)])
+
+                            else:
+
+                                analise_nipe2.append(jogada_pc[3:len(jogada_pc)])
+
+                            if analise_valor2[0] in lista_1:
+
+                                valor_card2 += valores[analise_valor2[0]]
+
+                            elif analise_valor2[0] in lista2:
+
+                                valorindex2 += valoresindex[jogada_pc[0:1]]
+
+                            valor_nipe2 += nipe_valores[analise_nipe2[0]]
+
+                            if valor_nipe2 != valor_nipe1 and valorindex < 9:
+
+                                computador_jogada.append(jogada_pc)
+
+                            else:
+
+                                i += 1
+
+                                del analise_nipe2[0]
+
+                                del analise_valor2[0]
+
+                                valorindex2 = 0
+
+                                valor_card2 = 0
+
+                                valor_nipe2 = 0
+
+                        i = -(len(computador) - 1)
+
+                        while i <= 0 and len(computador_jogada) != 1:
+
+                            jogada_pc = computador[i]
+
+                            analise_valor2.append(jogada_pc[0:1])
+
+                            if jogada_pc[0:1] != '1':
+
+                                analise_nipe2.append(jogada_pc[2:len(jogada_pc)])
+
+                            else:
+
+                                analise_nipe2.append(jogada_pc[3:len(jogada_pc)])
+
+                            if analise_valor2[0] in lista_1:
+
+                                valor_card2 += valores[analise_valor2[0]]
+
+                            elif analise_valor2[0] in lista2:
+
+                                valorindex2 += valoresindex[jogada_pc[0:1]]
+
+                            valor_nipe2 += nipe_valores[analise_nipe2[0]]
+
+                            if valor_nipe2 != valor_nipe1 and valor_card2 == 0:
+
+                                computador_jogada.append(jogada_pc)
+
+                            else:
+
+                                i += 1
+
+                                del analise_nipe2[0]
+
+                                del analise_valor2[0]
+
+                                valorindex2 = 0
+
+                                valor_card2 = 0
+
+                                valor_nipe2 = 0
+
+                        i = -(len(computador) - 1)
+
+                        while i <= 0 and len(computador_jogada) != 1:
+
+                            jogada_pc = computador[i]
+
+                            analise_valor2.append(jogada_pc[0:1])
+
+                            if jogada_pc[0:1] != '1':
+
+                                analise_nipe2.append(jogada_pc[2:len(jogada_pc)])
+
+                            else:
+
+                                analise_nipe2.append(jogada_pc[3:len(jogada_pc)])
+
+                            if analise_valor2[0] in lista_1:
+
+                                valor_card2 += valores[analise_valor2[0]]
+
+                            elif analise_valor2[0] in lista2:
+
+                                valorindex2 += valoresindex[jogada_pc[0:1]]
+
+                            valor_nipe2 += nipe_valores[analise_nipe2[0]]
+
+                            computador_jogada.append(jogada_pc)
+
+                        if len(computador_jogada) != 1:
+
+                            computador_jogada.append(jogada_pc)
+
+                            computador.append(jogada_pc)
+
+                            analise_valor2.append(jogada_pc[0:1])
+
+                            if jogada_pc[0:1] != '1':
+                                analise_nipe2.append(jogada_pc[2:len(jogada_pc)])
+
+                            if analise_valor2[0] in lista_1:
+
+                                valor_card2 += valores[analise_valor2[0]]
+
+                            elif analise_valor2[0] in lista2:
+
+                                valorindex2 += valoresindex[jogada_pc[0:1]]
+
+                        del computador[computador.index(jogada_pc)]
+
+                        if max in computador_jogada and (inmax in baralho or inmax in computador or inmax in jogador):
+
+                            jogar = 2
+
+                            computador.append(jogada_pc)
+
+                        else:
+
+                            if (valor_nipe == valor_nipe1) and (valor_nipe2 != valor_nipe1):
+
+                                pontos_rodada = valor_card + valor_card2
+
+                                seus_pontos += valor_card + valor_card2
+
+                                suas_cartas.append(jogad)
+
+                                suas_cartas.append(jogada_pc)
+
+                                jogar = 1
+
+                                print('{} x {} \nvoce ganhou {} pontos'.format(jogad, jogada_pc, pontos_rodada))
+
+
+
+                            elif (valor_nipe != valor_nipe1) and (valor_nipe2 == valor_nipe1):
+
+                                pontos_rodada = valor_card + valor_card2
+
+                                pontos_do_computador += valor_card + valor_card2
+
+                                suas_cartas.append(jogad)
+
+                                suas_cartas.append(jogada_pc)
+
+                                jogar = 2
+
+                                print(
+                                    '{} x {} \ncomputador ganhou {} pontos'.format(jogad, jogada_pc, pontos_rodada))
+
+
+
+
+
+                            elif valor_nipe == valor_nipe2:
+
+                                if valor_card > valor_card2:
+
+                                    pontos_rodada = valor_card + valor_card2
+
+                                    seus_pontos += valor_card + valor_card2
+
+                                    suas_cartas.append(jogad)
+
+                                    suas_cartas.append(jogada_pc)
+
+                                    jogar = 1
+
+                                    print('{} x {} \nvoce ganhou {} pontos'.format(jogad, jogada_pc, pontos_rodada))
+
+
+
+
+
+                                elif valor_card < valor_card2:
+
+                                    pontos_rodada = valor_card + valor_card2
+
+                                    pontos_do_computador += valor_card + valor_card2
+
+                                    jogar = 2
+
+                                    print('{} x {} \ncomputador ganhou {} pontos'.format(jogad, jogada_pc,
+                                                                                            pontos_rodada))
+
+                                else:
+
+                                    if valorindex > valorindex2:
+
+                                        pontos_rodada = valor_card + valor_card2
+
+                                        suas_cartas.append(jogad)
+
+                                        suas_cartas.append(jogada_pc)
+
+                                        jogar = 1
+
+                                        print('{} x {} \nvoce ganhou {} pontos'.format(jogad, jogada_pc,
+                                                                                        pontos_rodada))
+
+
+
+                                    elif valorindex < valorindex2:
+
+                                        pontos_rodada = valor_card + valor_card2
+
+                                        suas_cartas.append(jogad)
+
+                                        suas_cartas.append(jogada_pc)
+
+                                        jogar = 2
+
+                                        print('{} x {} \ncomputador ganhou {} pontos'.format(jogad, jogada_pc,
+                                                                                                pontos_rodada))
+
+                            elif valor_nipe != valor_nipe2:
+
+                                pontos_rodada = valor_card + valor_card2
+
+                                seus_pontos += valor_card + valor_card2
+
+                                suas_cartas.append(jogad)
+
+                                suas_cartas.append(jogada_pc)
+
+                                jogar = 1
+
+                                print('{} x {} \nvoce ganhou {} pontos'.format(jogad, jogada_pc, pontos_rodada))
+
+                        del computador_jogada[0]
+
+                        del analise_nipe2[0]
+
+                        del analise_valor2[0]
+
+                        valorindex2 = 0
+
+                        valor_nipe2 = 0
+
+                        valor_card2 = 0
+
+                        Todas_as_jogadas.append(jogad)
+
+                        Todas_as_jogadas.append(jogada_pc)
+
+                    valor_nipe = 0
+
+                    valor_card = 0
+
+                    valorindex = 0
+
+                    del analise_valor[0]
+
+                    del analise_nipe[0]
+
+                    del jogada_vc[0]
+
+        if seus_pontos > pontos_do_computador:
+
+            print('voce venceu com {} pontos x {} pontos \n'.format(seus_pontos, pontos_do_computador))
+
+            seu = int(input('[1]- quero ver minhas cartas \n[2]- ver todas as jogadas\n[3]- exit \n[?]- jogar novamente\n\n'))
+
+            if seu == 1:
+
+                print(suas_cartas)
+
+
+            elif seu == 2:
+                print('[sua carta] x [carta do computador]')
+                i= 1
+                while len(Todas_as_jogadas) != 0:
+                    print('[{}]- {} x {}\n'.format(i,Todas_as_jogadas[0], Todas_as_jogadas[1]))
+
+                    del Todas_as_jogadas[0]
+
+                    del Todas_as_jogadas[0]
+                    i += 1
+
+
+            elif seu == 3:
+
+                exit()
+
+        elif seus_pontos < pontos_do_computador:
+
+            print('\nO computador venceu com {} pontos x {} pontos \n'.format(pontos_do_computador, seus_pontos))
+
+            seu = int(input('[1]- quero ver minhas cartas \n[2]- ver todas as jogadas\n[3]- exit \n[?]- jogar novamente\n\n'))
+
+            if seu == 1:
+
+                print(suas_cartas)
+
+            elif seu == 2:
+                print('[sua carta] x [carta do computador]')
+                i= 1
+                while len(Todas_as_jogadas) != 0:
+                    print('[{}]- {} x {}\n'.format(i,Todas_as_jogadas[0], Todas_as_jogadas[1]))
+
+                    del Todas_as_jogadas[0]
+
+                    del Todas_as_jogadas[0]
+                    i += 1
+
+            elif seu == 3:
+
+                exit()
+
+
+        else:
+
+            print('\nO empate \n {} pontos x {} pontos \n'.format(pontos_do_computador, seus_pontos))
+
+            seu = int(input('[1]- quero ver minhas cartas \n[2]- ver todas as jogadas\n[3]- exit \n[?]- jogar novamente\n\n'))
+
+            if seu == 1:
+
+                print(suas_cartas)
+
+            elif seu == 2:
+                print('[sua carta] x [carta do computador]')
+                i= 1
+                while len(Todas_as_jogadas) != 0:
+                    print('[{}]- {} x {}\n'.format(i,Todas_as_jogadas[0], Todas_as_jogadas[1]))
+
+                    del Todas_as_jogadas[0]
+
+                    del Todas_as_jogadas[0]
+                    i += 1
+            elif seu == 3:
+
+                exit()
+        pontos_do_computador = 0
+        seus_pontos = 0
